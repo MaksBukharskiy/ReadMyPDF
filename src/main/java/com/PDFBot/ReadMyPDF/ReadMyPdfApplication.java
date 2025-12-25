@@ -10,6 +10,6 @@ public class ReadMyPdfApplication {
     public static void main(String[] args) {
         SpringApplication.run(ReadMyPdfApplication.class, args);
 
-        log.info("\n✅✅✅✅✅✅✅✅✅✅✅✅✅");
+        log.info("\n✅✅✅✅✅✅✅✅✅✅✅✅✅✅");
     }
 }
