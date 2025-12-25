@@ -11,16 +11,5 @@ public class ReadMyPdfApplication {
         SpringApplication.run(ReadMyPdfApplication.class, args);
 
         log.info("\n✅✅✅✅✅✅✅✅✅✅✅✅✅");
-
-        System.out.println("""
-            \n====================================
-            ✅ ReadMyPDF Bot запущен успешно!
-            📞 Телеграм бот: @ReadMyPdfBot
-            🌐 Сервер: http://localhost:8080
-            ====================================
-            """);
-
-
-        log.info("✅✅✅✅✅✅✅✅✅✅✅✅✅");
     }
 }
