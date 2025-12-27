@@ -39,3 +39,16 @@ logging:
     org.springframework: WARN
   pattern:
     console: "%d{HH:mm:ss} %-5level - %msg%n"
+
+bot:
+  start:
+    message: "Привет, %s! Я ReadMyPDF бот!\n\nПросто отправь мне PDF файл, и я извлеку из него текст!"
+  help:
+    message: "Помощь по использованию:\n\n1. Отправь мне PDF файл (до 10MB)\n2. Я проверю файл\n3. Извлеку текст\n4. Верну результат"
+  status:
+    message: "Система работает нормально\nВерсия: 1.0.0"
+  default:
+    message: "Отправь мне PDF файл или используй /help"
+  document:
+    received: "Получил файл: %s\nОт: %s\nРазмер: %.2f MB\nОбрабатываю..."
+    error: "Ошибка: %s"
