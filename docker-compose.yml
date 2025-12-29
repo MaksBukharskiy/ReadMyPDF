@@ -1,17 +1,26 @@
+#version: '3.8'
+#
+#services:
+#  postgres:
+#    image: postgres:15-alpine
+#    container_name: readmypdf-db
+#    environment:
+#      POSTGRES_DB: readmypdf
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: postgres
+#    ports:
+#      - "5433:5433"
+#    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+#
+#volumes:
+#  postgres_data:
+
 version: '3.8'
-
 services:
-  postgres:
-    image: postgres:15-alpine
-    container_name: readmypdf-db
+  bot:
+    build: .
     environment:
-      POSTGRES_DB: readmypdf
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "5433:5433"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-volumes:
-  postgres_data:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - BOT_USERNAME=${BOT_USERNAME}
+    restart: always
