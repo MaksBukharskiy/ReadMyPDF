@@ -30,8 +30,8 @@ spring:
 
 telegram:
   bot:
-    token: ${BOT_TOKEN:7616022774:AAG-RFM_kLS_j7-D_QbpC_HGAgGcseXjGSk}
-    username: ${BOT_USERNAME:ReadMyPdfBot}
+    token: "7616022774:AAG-RFM_kLS_j7-D_QbpC_HGAgGcseXjGSk"
+    username: "ReadMyPdfBot"
 
 logging:
   level:
