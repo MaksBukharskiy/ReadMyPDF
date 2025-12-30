@@ -52,3 +52,5 @@ bot:
   document:
     received: "Получил файл: %s\nОт: %s\nРазмер: %.2f MB\nОбрабатываю..."
     error: "Ошибка: %s"
+  admin:
+    welcome: "Hello, you are in admin mode"

@@ -24,8 +24,15 @@ public class MessageService {
     @Value("${bot.document.error}")
     private String documentError;
 
+    @Value("${bot.admin.welcome}")
+    private String adminWelcome;
+
     public String getWelcomeMessage(String username) {
         return String.format(startMessage, username);
+    }
+
+    public String getAdminMessage() {
+        return adminWelcome;
     }
 
     public String getHelpMessage() {
