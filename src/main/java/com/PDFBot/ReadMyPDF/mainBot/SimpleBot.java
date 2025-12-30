@@ -1,5 +1,6 @@
 package com.PDFBot.ReadMyPDF.mainBot;
 
+import com.PDFBot.ReadMyPDF.service.Rate.RateLimiter;
 import com.PDFBot.ReadMyPDF.service.message.MessageService;
 import com.PDFBot.ReadMyPDF.service.pdf.PdfService;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,7 @@ public class SimpleBot extends TelegramLongPollingBot {
 
     private final MessageService messageService;
     private final PdfService pdfService;
+    private final RateLimiter rateLimiter;
 
     @Override
     public String getBotToken() {
@@ -48,6 +50,7 @@ public class SimpleBot extends TelegramLongPollingBot {
             if (update.hasMessage()) {
                 var msg = update.getMessage();
                 Long chatId = msg.getChatId();
+                Long userId = msg.getFrom().getId();
                 String username = msg.getFrom().getUserName();
 
                 log.info("📨 От @{}: {}", username,
@@ -55,20 +58,26 @@ public class SimpleBot extends TelegramLongPollingBot {
                                 "Файл: " + (msg.hasDocument() ?
                                         msg.getDocument().getFileName() : "другой тип"));
 
+                if (!rateLimiter.canMakeRequests(userId)) {
+                    sendMessage(chatId, "❌ Лимит: 50 запросов в день исчерпан");
+                    return;
+                }
+
                 if (msg.hasText()) {
-                    handleTextCommand(chatId, username, msg.getText());
+                    handleTextCommand(chatId, userId, username, msg.getText());
                 }
 
                 if (msg.hasDocument()) {
-                    handleDocument(chatId, username, msg.getDocument());
+                    handleDocument(chatId,userId, username, msg.getDocument());
                 }
+
             }
         } catch (Exception e) {
             log.error("🔥 Ошибка: {}", e.getMessage());
         }
     }
 
-    private void handleTextCommand(Long chatId, String username, String text) {
+    private void handleTextCommand(Long chatId, Long userId, String username, String text) {
         String response;
 
         switch (text) {
@@ -84,14 +93,24 @@ public class SimpleBot extends TelegramLongPollingBot {
                 response = messageService.getStatusMessage();
                 break;
 
+            case "/3861":
+                response = messageService.getAdminMessage();
+                break;
+
+            case "/limits":
+                response = rateLimiter.getStats(userId);
+                break;
+
             default:
                 response = messageService.getDefaultMessage();
         }
 
+        rateLimiter.inrementRequest(userId);
+
         sendMessage(chatId, response);
     }
 
-    private void handleDocument(Long chatId, String username, Document document) {
+    private void handleDocument(Long chatId, Long userId, String username, Document document) {
         try {
             String fileName = document.getFileName();
             String fileId = document.getFileId();
@@ -108,6 +127,8 @@ public class SimpleBot extends TelegramLongPollingBot {
 
             log.info("✅ Файл скачан: {}, размер: {} MB",
                     fileName, String.format("%.2f", sizeMB));
+
+            rateLimiter.inrementRequest(userId);
 
             sendMessage(chatId, messageService.getDocumentReceivedMessage(
                     fileName, username, sizeMB
