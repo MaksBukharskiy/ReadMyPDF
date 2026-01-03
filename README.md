@@ -47,24 +47,24 @@ ReadMyPDF/
 - [x] Basic command handling (/start, /help)
 
 ### 📅 Day 2: Core Features  
-- [] PDF file reception and validation  
-- [] Text extraction with Apache PDFBox  
-- [] Error handling and user feedback
+- [x] PDF file reception and validation  
+- [x] Text extraction with Apache PDFBox  
+- [x] Error handling and user feedback
 
 ### 📅 Day 3: Data Persistence  
-- [] PostgreSQL database setup  
-- [] User and file processing history  
-- \[] Statistics tracking
+- [x] PostgreSQL database setup  
+- [x] User and file processing history  
+- [x] Statistics tracking
 
 ### 📅 Day 4: Advanced Features  
 - [] Multi-language support  
-- [] File format validation  
-- [] Batch processing
+- [x] File format validation  
+- [x] Batch processing
 
 ### 📅 Day 5: Polish & Deploy  
-- [] Docker containerization  
-- [] Logging and monitoring  
-- [] Deployment configuration
+- [x] Docker containerization  
+- [x] Logging and monitoring  
+- [x] Deployment configuration
 
 ## 🤝 Contributing
 

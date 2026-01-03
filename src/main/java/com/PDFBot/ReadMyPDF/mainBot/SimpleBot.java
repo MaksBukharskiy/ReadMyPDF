@@ -59,7 +59,7 @@ public class SimpleBot extends TelegramLongPollingBot {
                                         msg.getDocument().getFileName() : "другой тип"));
 
                 if (!rateLimiter.canMakeRequests(userId)) {
-                    sendMessage(chatId, "❌ Лимит: 50 запросов в день исчерпан");
+                    sendMessage(chatId, "❌ Лимит: 3 запросa в день исчерпан");
                     return;
                 }
 
